@@ -78,10 +78,10 @@ module.exports = {
               .catch((err) => res.status(500).json(err));
           },
           
-          addTag(req, res) {
+          addReaction(req, res) {
             Thought.findOneAndUpdate(
               { _id: req.params.thoughtId },
-              { $addToSet: { tags: req.body } },
+              { $addToSet: { Reactions: req.body } },
               { runValidators: true, new: true }
             )
               .then((thought) =>
@@ -92,10 +92,10 @@ module.exports = {
               .catch((err) => res.status(500).json(err));
           },
 
-          removeTag(req, res) {
+          removeReaction(req, res) {
             Thought.findOneAndUpdate(
               { _id: req.params.thoughtId },
-              { $pull: { tags: { tagId: req.params.tagId } } },
+              { $pull: { Reactions: { ReactionId: req.params.ReactionId } } },
               { runValidators: true, new: true }
             )
               .then((thought) =>
